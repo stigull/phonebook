@@ -1,0 +1,10 @@
+{% load i18n %}
+<form id="{{ form.id }}" method="get" action="{% url phonebook_search %}">
+    <fieldset>
+        <legend>{% trans 'Leita í símaskrá' %}</legend>
+        
+        {{ form.query.label_tag }}
+        {{ form.query }}
+        <input type="submit" value="{% trans 'Leita' %}" />
+    </fieldset>
+</form>

@@ -1,0 +1,31 @@
+{% load i18n templatetools %}
+<ol>
+    {% for result in results %}
+    {% with result.profile as profile %}
+    <li class="vcard {{ forloop|get_position_class }}">
+        <img alt="{% trans 'Mynd af nemandanum' %}" src="{{ profile.display_image.small.url }}" class="photo" />
+        <a class="url fn n" href="{{ profile.get_absolute_url }}">  
+            {{ profile.get_short_fullname }}
+        </a>
+        {% if profile.phone %}
+        <span class="tel">
+            <abbr class="type" title="home">{% trans 'Heimasími' %}</abbr>
+            <span class="value">{{ profile.phone }}</span>
+        </span>
+        {% endif %}
+
+        {% if profile.phone and profile.gsm %}-{% endif %}
+        
+        {% if profile.gsm %}
+        <span class="tel">
+            <abbr class="type" title="mobile">{% trans 'Farsími' %}</abbr>
+            <span class="value">{{ profile.gsm }}</span>
+        </span>
+        {% endif %}
+        {% if user.is_staff %}
+        <span class="kennitala">{{ profile.get_kennitala }}</span>
+        {% endif %}
+    </li>
+    {% endwith %}
+    {% endfor %}
+</ol> 

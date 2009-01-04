@@ -1,0 +1,14 @@
+{% extends 'phonebook/phonebook_base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans 'Niðurstöður leitar' %}: {{ query }} &#124; {{ block.super }}{% endblock %}
+
+{% block content %} 
+<h2>{% trans 'Niðurstöður leitar' %}:</h2>
+<h3>{% trans 'Leitarstrengur' %}: {{ query }}</h3>
+{% if results %}
+    {% include 'phonebook/snippets/search_results_list.html' %}
+{% else %}
+        <p class="info">{% trans 'Leitin skilaði engum niðurstöðum' %}.</p>
+{% endif %}
+{% endblock %}

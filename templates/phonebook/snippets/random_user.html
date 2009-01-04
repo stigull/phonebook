@@ -1,0 +1,12 @@
+{% load i18n %}
+<div class="vcard">
+    <img alt="{% trans 'Mynd af nemandanum' %}" src="{{ profile.get_display_image }}" class="photo" />
+
+    <h1 class="fn n">  
+        <span class="given-name">{{ profile.user.first_name }}</span>
+        {% if profile.middlenames %}
+        <span class="additional-name">{{ profile.middlenames }}</span>
+        {% endif %}
+        <span class="family-name">{{ profile.user.last_name }}</span>
+    </h1>
+</div>

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load i18n pagination_tags phonebook_tags templatetools compressed %}
+
+{% block title %}{% trans 'Símaskrá' %} &#124; {{ block.super }}{% endblock %}
+
+{% block css %}{% compressed_css 'phonebook' %}{% endblock %}
+
+{% block content %}
+<h1>{% trans 'Félagið í myndum' %}</h1>
+{% get_list_of_users as list_of_users %}
+<ul id="users-as-images">
+{% for profile in list_of_users %}
+{% if profile.user.is_active %}
+<li><a href="{{ profile.get_absolute_url }}"><img src="{{ profile.display_image.small.url }}" alt="{{ profile.get_short_fullname }}" /></a></li>
+{% endif %}
+{% endfor %}
+</ul>
+{% endblock content %}
+
+{% block alt_content %}
+<h1>{% trans 'Notendur' %}</h1>
+{% get_list_of_users as list_of_users %}
+{% autopaginate list_of_users %}
+{% paginate %}
+<ul id="list-of-users">
+{% for profile in list_of_users %}
+    <li class="{% if not profile.user.is_active %}inactive{% endif %}">
+        {% ifequal request.path profile.get_absolute_url %}
+        <span class="selected">{{ profile.get_short_fullname }}</span>
+        {% else %}
+        <a href="{{ profile.get_absolute_url }}">{{ profile.get_short_fullname }}</a>
+        {% endifequal %}
+    </li>
+{% endfor %}
+</ul>
+{% paginate %}
+{% endblock %}
