@@ -3,9 +3,9 @@
 
 {% block title %}{% trans 'Niðurstöður leitar' %}: {{ query }} &#124; {{ block.super }}{% endblock %}
 
-{% block content %} 
-<h2>{% trans 'Niðurstöður leitar' %}:</h2>
-<h3>{% trans 'Leitarstrengur' %}: {{ query }}</h3>
+{% block content %}
+<h1>{% trans 'Niðurstöður leitar' %}:</h1>
+<h2>{% trans 'Leitarstrengur' %}: {{ query }}</h2>
 {% if results %}
     {% include 'phonebook/snippets/search_results_list.html' %}
 {% else %}

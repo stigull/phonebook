@@ -3,40 +3,44 @@
     {% for result in results %}
     {% with result.profile as profile %}
     <li class="vcard">
-        <img alt="{% trans 'Mynd af nemandanum' %}" src="{{ profile.get_thumbnail }}" class="photo" />
-        <a class="url fn n" href="{{ profile.get_absolute_url }}">  
-            <span class="given-name">{{ profile.user.first_name }}</span>
-            {% if profile.middlenames %}
-            <span class="additional-name">{{ profile.middlenames }}</span>
-            {% endif %}
-            <span class="family-name">{{ profile.user.last_name }}</span>
-        </a>
-        <div class="org">{{ profile.get_department }}</div>
-        <a class="email" href="mailto:{{ profile.user.email }}">{{ profile.user.email }}</a>
-        {% if profile.address %}
-        <div class="adr">
-            <div class="sa-pc">
-                <span class="street-address">{{ profile.address }}</span>,
-                <span class="postal-code">{{ profile.postalcode }}</span> <span class="locality">{{ profile.city }}</span>
+        <img alt="{% trans 'Mynd af nemandanum' %}" src="{{ profile.display_image.medium.url }}" class="photo" />
+        <div class="details">
+            <h4>
+            <a class="url fn n" href="{{ profile.get_absolute_url }}">
+                <span class="given-name">{{ profile.user.first_name }}</span>
+                {% if profile.middlenames %}
+                <span class="additional-name">{{ profile.middlenames }}</span>
+                {% endif %}
+                <span class="family-name">{{ profile.user.last_name }}</span>
+            </a>
+            </h4>
+            <div class="org">{{ profile.get_department }}</div>
+            <a class="email" href="mailto:{{ profile.user.email }}">{{ profile.user.email }}</a>
+            {% if profile.address %}
+            <div class="adr">
+                <div class="sa-pc">
+                    <span class="street-address">{{ profile.address }}</span>
+                    <span class="postal-code">{{ profile.postalcode }}</span> <span class="locality">{{ profile.city }}</span>
+                </div>
+                <div class="country-name">Ísland</div>
             </div>
-            <div class="country-name">Ísland</div>
+            {% endif %}
+
+            {% if profile.phone %}
+            <div class="tel">
+                <abbr class="type" title="home">{% trans 'Heimasími' %}</abbr>:
+                <span class="value">{{ profile.phone }}</span>
+            </div>
+            {% endif %}
+
+            {% if profile.gsm %}
+            <div class="tel">
+                <abbr class="type" title="mobile">{% trans 'Farsími' %}</abbr>:
+                <span class="value">{{ profile.gsm }}</span>
+            </div>
+            {% endif %}
         </div>
-        {% endif %}
-        
-        {% if profile.phone %}
-        <div class="tel">
-            <abbr class="type" title="home">{% trans 'Heimasími' %}</abbr>:
-            <span class="value">{{ profile.phone }}</span>
-        </div>
-        {% endif %}
-        
-        {% if profile.gsm %}
-        <div class="tel">
-            <abbr class="type" title="mobile">{% trans 'Farsími' %}</abbr>: 
-            <span class="value">{{ profile.gsm }}</span>
-        </div>
-        {% endif %}
     </li>
     {% endwith %}
     {% endfor %}
-</ol> 
+</ol>
