@@ -11,7 +11,7 @@
 <ul id="users-as-images">
 {% for profile in list_of_users %}
 {% if profile.user.is_active %}
-<li><a href="{{ profile.get_absolute_url }}"><img src="{{ profile.display_image.small.url }}" alt="{{ profile.get_short_fullname }}" /></a></li>
+<li><a title="{{ profile.get_short_fullname }}"  href="{{ profile.get_absolute_url }}"><img src="{{ profile.display_image.medium.url }}" alt="{{ profile.get_short_fullname }}" /></a></li>
 {% endif %}
 {% endfor %}
 </ul>
